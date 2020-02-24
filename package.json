@@ -7,5 +7,9 @@
     "type": "git",
     "url": "?.git"
   },
-  "author": "you linguo"
+  "author": "you linguo",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-util": "^3.0.8"
+  }
 }
