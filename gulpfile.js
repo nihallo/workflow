@@ -15,21 +15,21 @@ var jsSources = [
 
 var sassSources = ['components/sass/style.scss'];
 
-gulp.task('coffee',function(){
+gulp.task('coffee',async function(){
 	gulp.src(coffeeSources)
 	.pipe(coffee({bare:true}))
 		.on('error',gutil.log)
-	.pipe(gulp.dest('components/scripts'))
+	.pipe(gulp.dest('components/scripts'));
 });
 
-gulp.task('js',function(){
+gulp.task('js',async function(){
 	gulp.src(jsSources)
 		.pipe(concat('script.js'))
 		.pipe(browserify())
-		.pipe(gulp.dest('builds/development/js'))
+		.pipe(gulp.dest('builds/development/js'));
 });
 
-gulp.task('compass',function(){
+gulp.task('compass',async function(){
 	gulp.src(sassSources)
 		.pipe(compass({
 			sass: 'components/sass',
@@ -37,8 +37,16 @@ gulp.task('compass',function(){
 			style: 'expanded'
 		}))
 		.on('error', gutil.log)
-		.pipe(gulp.dest('builds/development/css'))
+		.pipe(gulp.dest('builds/development/css'));
 });
 
+gulp.task('watch',async function(){
+	gulp.watch(coffeeSources,gulp.series('coffee'));
 
-gulp.task('default',gulp.series('coffee','js','compass'));
+	gulp.watch(jsSources,gulp.series('js'));
+
+	gulp.watch('components/sass/*.scss',gulp.series('compass'));
+
+});
+
+gulp.task('default',gulp.series('coffee','js','compass','watch'));
