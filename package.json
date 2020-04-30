@@ -16,7 +16,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.7.0",
     "gulp-util": "^3.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "mustache": "^4.0.0"
   }
 }
